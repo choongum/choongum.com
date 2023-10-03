@@ -96,3 +96,9 @@ a:hover { color: blue; }
   column-count:         1;
   }
 }
+
+@media (max-width: 400px) {
+  #shows {
+  font-size: 13px !important;
+  }
+}
