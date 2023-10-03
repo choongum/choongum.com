@@ -97,7 +97,7 @@ a:hover { color: blue; }
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
   #shows {
   font-size: 13px !important;
   }
