@@ -36,32 +36,27 @@ a:hover { color: blue; }
 
 /* Photos */
 
-#photos {
-  /* Prevent vertical gaps */
-  line-height: 0;
-   
-  -webkit-column-count: 3;
-  -webkit-column-gap:   0px;
-  -moz-column-count:    3;
-  -moz-column-gap:      0px;
-  column-count:         3;
-  column-gap:           0px; 
+.photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Create three equal-width columns */
+  grid-gap: 0; /* Remove the gap between columns */
+  margin-bottom: 50px;
 }
 
-#photos2 {
-  /* Prevent vertical gaps */
-  line-height: 0;
-   
-  -webkit-column-count: 3;
-  -webkit-column-gap:   0px;
-  -moz-column-count:    3;
-  -moz-column-gap:      0px;
-  column-count:         3;
-  column-gap:           0px;  
-  margin-bottom: 100px;
+.photos-horizontal {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Create two equal-width columns */
+  grid-gap: 0; /* Remove the gap between columns */
+  margin-bottom: 50px;
 }
 
-#photos img {
+.photos img {
+  /* Just in case there are inline attributes */
+  width: 100% !important;
+  height: auto !important;
+}
+
+.photos-horizontal img {
   /* Just in case there are inline attributes */
   width: 100% !important;
   height: auto !important;
