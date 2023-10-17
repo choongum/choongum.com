@@ -62,6 +62,30 @@ a:hover { color: blue; }
   height: auto !important;
 }
 
+.paintings {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 0;
+  margin-bottom: 25px;
+}
+
+.painting-details {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+  margin-bottom: 50px;
+}
+
+.paintings img {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.painting-details img {
+  width: 100% !important;
+  height: auto !important;
+}
+
 picture {
   margin-bottom: -3.5px;
 }
