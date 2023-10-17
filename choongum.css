@@ -63,5 +63,5 @@ a:hover { color: blue; }
 }
 
 picture {
-  margin: 0;
+  margin-bottom: -3.5px;
 }
