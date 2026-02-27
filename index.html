@@ -1,94 +1,690 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>choongum</title>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Rajdhani:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-H4193LZQVB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-H4193LZQVB');
-</script>
+:root {
+  --aero-blue:    #3aaed8;
+  --aero-lt:      #80d8f8;
+  --aero-dk:      #1a6890;
+  --text-on-body: #1e3248;
+  --text-mid:     #3a5470;
+}
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" type="text/css" href="choongum.css">
-    <title>Choongum</title>
-    <meta name="description" content="Choongum portfolio">
-    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/favicon/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-    <meta http-equiv="expires" content="0">
-    <meta property="og:image" content="webheader.jpg">
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  font-family: 'Nunito', sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-image: url('beachbackground.jpg');
+  background-size: cover;
+  background-position: center top;
+}
+
+/* ── WRAPPER ── */
+.wp-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* ═══ SHARED MODULE ═══ */
+.module {
+  position: relative;
+  background: linear-gradient(165deg,
+    #eef2f8 0%,
+    #dde4ef 25%,
+    #cdd8e6 55%,
+    #bfccd8 80%,
+    #b4c2d0 100%);
+  border: 1.5px solid #a0b4c8;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.96) inset,
+    0 -1px 0 rgba(0,0,0,0.14) inset,
+    1px 0 0 rgba(255,255,255,0.60) inset,
+    -1px 0 0 rgba(0,0,0,0.08) inset,
+    0 12px 48px rgba(0,20,50,0.30),
+    0 4px 14px rgba(0,20,50,0.20);
+}
+
+.module::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 52%;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.62) 0%,
+    rgba(255,255,255,0.24) 45%,
+    rgba(255,255,255,0.06) 75%,
+    transparent 100%);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.module::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 5%; right: 5%;
+  height: 22%;
+  background: linear-gradient(0deg, rgba(200,220,240,0.28) 0%, transparent 100%);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══ MAIN PLAYER ═══ */
+.main-player {
+  width: clamp(560px, 72vw, 840px);
+  border-radius: 30px 30px 6px 6px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Title bar ── */
+.titlebar {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(180deg, #e0eaf6 0%, #cad6e8 45%, #bccad8 100%);
+  border-bottom: 1px solid rgba(130,160,190,0.45);
+  border-radius: 28px 28px 0 0;
+  /* Left padding = bio-panel padding (16px) + panel-chrome padding (15px) = 31px to align with "Bio" label */
+  padding: 0 16px 0 31px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.titlebar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 58%;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.74) 0%,
+    rgba(255,255,255,0.38) 35%,
+    rgba(255,255,255,0.08) 75%,
+    transparent 100%);
+  border-radius: 28px 28px 0 0;
+  pointer-events: none;
+}
+
+/* Crisp highlight line along very top edge */
+.titlebar::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1.5px;
+  background: rgba(255,255,255,0.88);
+  border-radius: 28px 28px 0 0;
+  pointer-events: none;
+}
+
+.logo {
+  font-family: 'Comfortaa', cursive;
+  font-weight: 700;
+  font-size: clamp(18px, 2.4vw, 26px);
+  letter-spacing: 0.08em;
+  background: linear-gradient(175deg, #1e5880 0%, #2a82b8 40%, #3aaed8 70%, #5cc8e8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 1px 0 rgba(255,255,255,0.70));
+  flex: 0 0 auto;
+  margin-right: 16px;
+  line-height: 1;
+}
+
+.nav-pills { display: flex; gap: 5px; flex: 1; }
+
+.nav-pill {
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-on-body);
+  text-decoration: none;
+  padding: 3px 13px;
+  border-radius: 14px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.80) 0%,
+    rgba(210,228,245,0.58) 50%,
+    rgba(185,210,232,0.48) 100%);
+  border: 1px solid rgba(100,145,180,0.30);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.88) inset, 0 2px 6px rgba(0,30,70,0.12);
+  transition: all 0.18s;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-pill::before {
+  content: '';
+  position: absolute;
+  top: 1px; left: 20%; right: 20%;
+  height: 44%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.60), transparent);
+  border-radius: 0 0 50% 50%;
+  pointer-events: none;
+}
+
+.nav-pill:hover {
+  color: #0e3e62;
+  background: linear-gradient(180deg, rgba(200,240,255,0.92) 0%, rgba(130,210,245,0.68) 100%);
+  border-color: rgba(58,174,216,0.55);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.95) inset, 0 0 12px rgba(58,174,216,0.28), 0 2px 6px rgba(0,30,70,0.10);
+}
+
+/* ── Power button ── */
+.power-btn {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+  background: radial-gradient(circle at 38% 28%,
+    #c8f0ff 0%, #5cc0e8 28%, #1e7eb0 55%, #0a4870 80%, #062038 100%);
+  border: 1.5px solid rgba(10,50,100,0.55);
+  box-shadow:
+    0 0 10px rgba(58,174,216,0.70),
+    0 0 22px rgba(58,174,216,0.35),
+    0 2px 6px rgba(0,0,0,0.38),
+    inset 0 1px 0 rgba(255,255,255,0.55);
+  animation: powerGlow 3s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.4s, box-shadow 0.4s;
+  user-select: none;
+}
+
+.power-btn:hover { opacity: 0.85; }
+
+@keyframes powerGlow {
+  0%,100% { box-shadow: 0 0 10px rgba(58,174,216,0.70), 0 0 22px rgba(58,174,216,0.35), 0 2px 6px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.55); }
+  50%      { box-shadow: 0 0 6px rgba(58,174,216,0.40), 0 0 12px rgba(58,174,216,0.18), 0 2px 6px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.55); }
+}
+
+/* Power off state */
+.power-btn.off {
+  animation: none;
+  background: radial-gradient(circle at 38% 28%,
+    #3a4448 0%, #1a2228 40%, #0e1418 70%, #060c10 100%);
+  box-shadow: 0 0 3px rgba(30,80,100,0.30), 0 2px 6px rgba(0,0,0,0.50), inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+/* Power icon */
+.power-btn::before {
+  content: '';
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(200,240,255,0.90);
+  border-top-color: transparent;
+  position: absolute;
+  transition: border-color 0.4s;
+}
+
+.power-btn.off::before { border-color: rgba(120,150,160,0.45); border-top-color: transparent; }
+
+.power-btn::after {
+  content: '';
+  width: 2px; height: 7px;
+  background: rgba(200,240,255,0.90);
+  position: absolute;
+  top: 5px;
+  border-radius: 2px;
+  transition: background 0.4s;
+}
+
+.power-btn.off::after { background: rgba(100,130,140,0.40); }
+
+/* ── Player body ── */
+.player-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.player-body::before {
+  content: '';
+  position: absolute;
+  top: 10px; bottom: 10px; left: 50%;
+  width: 1px;
+  background: linear-gradient(180deg,
+    transparent,
+    rgba(120,160,200,0.28) 20%,
+    rgba(120,160,200,0.28) 80%,
+    transparent);
+  pointer-events: none;
+}
+
+/* ── POWERED OFF: fade content inside screens ── */
+.screens-off .panel-chrome,
+.screens-off .disco-scroll {
+  transition: background 0.6s;
+  background: linear-gradient(175deg, #040a0e 0%, #030810 100%) !important;
+}
+
+.screens-off .bio-text,
+.screens-off .panel-section-label,
+.screens-off .album-name,
+.screens-off .album-year,
+.screens-off .album-film-tag,
+.screens-off .disco-label,
+.screens-off .disco-led {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Normal state transition back on */
+.bio-text,
+.panel-section-label,
+.album-name,
+.album-year,
+.album-film-tag,
+.disco-label,
+.disco-led {
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
+
+/* ── Bio panel ── */
+.bio-panel {
+  padding: 14px 16px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-chrome {
+  background: linear-gradient(175deg, #071018 0%, #050d16 100%);
+  border-radius: 10px;
+  border: 1.5px solid rgba(0,0,0,0.50);
+  box-shadow:
+    inset 0 3px 14px rgba(0,0,0,0.90),
+    inset 0 0 30px rgba(0,8,20,0.95),
+    0 1px 0 rgba(255,255,255,0.70);
+  padding: 12px 15px;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  transition: background 0.6s;
+}
+
+.panel-chrome::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.22) 2px, rgba(0,0,0,0.22) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.panel-chrome::after {
+  content: '';
+  position: absolute;
+  top: -10%; left: 5%; right: 5%;
+  height: 50%;
+  background: radial-gradient(ellipse, rgba(58,174,216,0.10) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.panel-section-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.32em;
+  color: #4ab8d8;
+  text-transform: uppercase;
+  margin-bottom: 9px;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 0 10px rgba(74,184,216,0.60);
+}
+
+.panel-section-label::after {
+  content: '';
+  display: inline-block;
+  width: 22px; height: 1px;
+  background: linear-gradient(90deg, #2a88b0, transparent);
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.bio-text {
+  color: #b8dff0;
+  font-size: clamp(11px, 1.08vw, 13px);
+  line-height: 1.82;
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.80);
+}
+
+.bio-text p + p { margin-top: 9px; }
+
+/* ── Disco panel ── */
+.disco-panel {
+  padding: 14px 16px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.disco-header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 0 2px;
+}
+
+.disco-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.30em;
+  color: #4ab8d8;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(74,184,216,0.50);
+}
+
+.disco-led {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 33% 28%,
+    #d8f4ff, #44bce0 42%, #0a6888 80%);
+  border: 1px solid rgba(0,0,0,0.25);
+  box-shadow:
+    0 0 8px rgba(58,174,216,0.90),
+    0 0 18px rgba(58,174,216,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.55);
+  animation: ledPulse 2.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes ledPulse {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+
+.disco-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: linear-gradient(175deg, #071018 0%, #050d16 100%);
+  border-radius: 10px;
+  border: 1.5px solid rgba(0,0,0,0.50);
+  box-shadow:
+    inset 0 3px 14px rgba(0,0,0,0.90),
+    inset 0 0 30px rgba(0,8,20,0.95),
+    0 1px 0 rgba(255,255,255,0.70);
+  padding: 4px 0;
+  position: relative;
+  transition: background 0.6s;
+}
+
+.disco-scroll::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.disco-scroll::-webkit-scrollbar { width: 4px; }
+.disco-scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.35); }
+.disco-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3aaed8, #1a6890);
+  border-radius: 2px;
+}
+
+.album-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 12px;
+  text-decoration: none;
+  transition: background 0.14s, border-color 0.14s;
+  position: relative;
+  z-index: 2;
+  border-left: 2px solid transparent;
+}
+
+.album-row:hover {
+  background: rgba(58,174,216,0.13);
+  border-left-color: var(--aero-blue);
+}
+
+.album-row:hover .album-name {
+  color: var(--aero-lt);
+  text-shadow: 0 0 10px rgba(58,174,216,0.55);
+}
+
+/* Left side of row: name + optional film tag grouped */
+.album-left {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+}
+
+.album-name {
+  color: #90ccdf;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(12px, 1.18vw, 14px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: color 0.14s, text-shadow 0.14s;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.70);
+  white-space: nowrap;
+}
+
+/* "Film" tag — distinct teal-amber color, smaller */
+.album-film-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: #d4a050;
+  text-shadow: 0 0 8px rgba(212,160,80,0.55);
+  text-transform: uppercase;
+  flex-shrink: 0;
+  transition: opacity 0.5s ease;
+}
+
+.album-year {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: #2e6880;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.14s, opacity 0.5s ease;
+}
+
+.album-row:hover .album-year { color: var(--aero-blue); }
+
+/* ═══ EQ MODULE ═══ */
+.eq-module {
+  width: clamp(400px, 52vw, 620px);
+  margin-left: auto;
+  margin-right: clamp(4px, 2.5vw, 50px);
+  border-radius: 0 0 26px 26px;
+  border-top: 1.5px solid rgba(255,255,255,0.60);
+  overflow: hidden;
+}
+
+.eq-tab {
+  position: absolute;
+  top: -1px; left: 24px;
+  width: 68px; height: 6px;
+  background: linear-gradient(180deg, #d0dcea, #bccad8);
+  border: 1.5px solid #a8b8c8;
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 -1px 0 rgba(255,255,255,0.70) inset;
+}
+
+.eq-titlebar {
+  height: 24px;
+  background: linear-gradient(180deg, #d6e2ef 0%, #c4d2e0 100%);
+  border-bottom: 1px solid rgba(100,140,170,0.28);
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.eq-titlebar::before {
+  content: '';
+  position: absolute;
+  top: 1px; left: 20%; right: 20%;
+  height: 9px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.52), transparent);
+  border-radius: 0 0 50% 50%;
+}
+
+.eq-title-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  color: var(--text-mid);
+  text-transform: uppercase;
+}
+
+.eq-title-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(80,120,160,0.22), transparent);
+}
+
+.eq-body {
+  padding: 10px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
+  z-index: 1;
+}
+
+.player-wrap {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1.5px solid rgba(0,0,0,0.32);
+  background: #050d16;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.75), 0 1px 0 rgba(255,255,255,0.68);
+}
+
+.player-wrap iframe {
+  display: block;
+  width: 100%;
+  border: none;
+}
+
+/* ═══ MOBILE ═══ */
+@media (max-width: 640px) {
+  html, body { overflow: auto; height: auto; }
+  body { align-items: flex-start; padding: 10px; }
+  .main-player { width: 100%; border-radius: 22px 22px 4px 4px; }
+  .player-body { grid-template-columns: 1fr; }
+  .player-body::before { display: none; }
+  .bio-panel { border-bottom: 1px solid rgba(120,160,200,0.18); }
+  .disco-scroll { max-height: 55vh; }
+  .eq-module { width: 100%; margin-right: 0; border-radius: 0 0 22px 22px; }
+  .eq-tab { display: none; }
+  .titlebar { padding-left: 18px; }
+}
+</style>
 </head>
-
 <body>
 
-    <div class="container">
+<div class="wp-wrapper">
 
-        <div class="column">
+  <!-- MODULE 1: MAIN PLAYER -->
+  <div class="module main-player">
 
-            <div id="header">
-                <h1>CHOONGUM</h1>
-            </div>
-                <br><br><br>
-            <div id="contact">
-                <p>booking: <a href="mailto:choongum@gmail.com" id="email" target="_blank">choongum@gmail.com</a></p>
-                <a href="https://www.instagram.com/choongum/" id="ig" target="_blank">instagram</a>
-                <a href="paintings/paintings.html" id="paintings" target="_blank">paintings</a>
-            </div>
+    <div class="titlebar">
+      <span class="logo">choongum</span>
+      <nav class="nav-pills">
+        <a class="nav-pill" href="https://www.instagram.com/choongum/" target="_blank">instagram</a>
+        <a class="nav-pill" href="https://choongum.com/paintings/paintings.html" target="_blank">paintings</a>
+        <a class="nav-pill" href="/cdn-cgi/l/email-protection#e2818a8d8d8c85978fa2858f838b8ecc818d8f">booking</a>
+      </nav>
+      <div class="power-btn" id="powerBtn" title="Power"></div>
+    </div>
 
-            <div id="work-row">
-                <div id="work-links">
-                    <h2>Work</h2>
-
-                    <a href="https://choongum.bandcamp.com/album/graffio" target="_blank">Graffio (2023)</a><br>
-                    <a href="https://choongum.bandcamp.com/album/so-far-so-good" target="_blank">So Far So Good (2023)</a><br>
-                    <a href="https://choongum.bandcamp.com/album/biomorphism" target="_blank">Biomorphism (2021)</a><br>
-                    <a href="https://choongum.bandcamp.com/album/decomposition" target="_blank">Decomposition (2021)</a><br>
-                    <a href="https://choongum.bandcamp.com/album/empty-club" target="_blank">Empty Club (2020)</a><br>
-                    <a href="https://choongum.bandcamp.com/album/choongum-type-beat" target="_blank">Choongum Type Beat (2020)</a><br>
-                    <a href="https://choongum.bandcamp.com/album/peace-fixation" target="_blank">Peace Fixation (2019)</a><br>
-                    <a href="https://choongum.bandcamp.com/album/cityscapes" target="_blank">Cityscapes (2019)</a><br>
-                    <a href="https://youtu.be/mT7pdPEUf94" target="_blank">Nature Documentary (2015) *FILM*</a><br>
-                    <a href="https://choongum.bandcamp.com/album/pure-spirit" target="_blank">Pure Spirit (2013)</a><br>
-                    <a href="https://choongum.bandcamp.com/album/timefog" target="_blank">Timefog (2012)</a><br>
-
-                    
-                </div>
-
-                <a href="choongum.jpg" target="_blank"><img id="profilepic" src="choongum.jpg" alt="Choongum"></a>
-            </div>
-
+    <div class="player-body" id="playerBody">
+      <div class="bio-panel">
+        <div class="panel-chrome">
+          <div class="panel-section-label">Bio</div>
+          <div class="bio-text">
+            <p>Raised on the outskirts of the San Francisco Bay Area, Choongum's productions channel the playful energy of Hyphy alongside the swampy, atmospheric textures of the city's 90s electronic underground.</p>
+            <p>As a DJ, his selection reflects these same moods, whether it's an extended chill-out room set or a frenetic club mix.</p>
+            <p>His unique productions have earned him SoundCloud's Artist of the Day and Bandcamp's New and Notable, while his selection has taken him across the globe, from the clubs of Mexico City to the jungles of Sri Lanka to the beaches of Australia.</p>
+          </div>
         </div>
+      </div>
 
-        <div class="column">
+      <div class="disco-panel">
+        <div class="disco-header-row">
+          <div class="disco-led"></div>
+          <span class="disco-label">Discography</span>
+        </div>
+        <div class="disco-scroll">
+          <a class="album-row" href="https://choongum.bandcamp.com/album/graffio" target="_blank"><div class="album-left"><span class="album-name">Graffio</span></div><span class="album-year">2023</span></a>
+          <a class="album-row" href="https://choongum.bandcamp.com/album/so-far-so-good" target="_blank"><div class="album-left"><span class="album-name">So Far So Good</span></div><span class="album-year">2023</span></a>
+          <a class="album-row" href="https://choongum.bandcamp.com/album/biomorphism" target="_blank"><div class="album-left"><span class="album-name">Biomorphism</span></div><span class="album-year">2021</span></a>
+          <a class="album-row" href="https://choongum.bandcamp.com/album/decomposition" target="_blank"><div class="album-left"><span class="album-name">Decomposition</span></div><span class="album-year">2021</span></a>
+          <a class="album-row" href="https://choongum.bandcamp.com/album/empty-club" target="_blank"><div class="album-left"><span class="album-name">Empty Club</span></div><span class="album-year">2020</span></a>
+          <a class="album-row" href="https://choongum.bandcamp.com/album/choongum-type-beat" target="_blank"><div class="album-left"><span class="album-name">Choongum Type Beat</span></div><span class="album-year">2020</span></a>
+          <a class="album-row" href="https://choongum.bandcamp.com/album/peace-fixation" target="_blank"><div class="album-left"><span class="album-name">Peace Fixation</span></div><span class="album-year">2019</span></a>
+          <a class="album-row" href="https://choongum.bandcamp.com/album/cityscapes" target="_blank"><div class="album-left"><span class="album-name">Cityscapes</span></div><span class="album-year">2019</span></a>
+          <a class="album-row" href="https://youtu.be/mT7pdPEUf94" target="_blank"><div class="album-left"><span class="album-name">Nature Documentary</span><span class="album-film-tag">Film</span></div><span class="album-year">2015</span></a>
+          <a class="album-row" href="https://choongum.bandcamp.com/album/pure-spirit" target="_blank"><div class="album-left"><span class="album-name">Pure Spirit</span></div><span class="album-year">2013</span></a>
+          <a class="album-row" href="https://choongum.bandcamp.com/album/timefog" target="_blank"><div class="album-left"><span class="album-name">Timefog</span></div><span class="album-year">2012</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            <iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=398605062/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" seamless><a href="https://choongum.bandcamp.com/album/empty-club">Empty Club by Choongum</a></iframe>
+  <!-- MODULE 2: PLAYER -->
+  <div class="module eq-module">
+    <div class="eq-tab"></div>
+    <div class="eq-titlebar">
+      <span class="eq-title-text">Player</span>
+      <div class="eq-title-line"></div>
+    </div>
+    <div class="eq-body">
+      <div class="player-wrap">
+        <iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=398605062/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" seamless><a href="https://choongum.bandcamp.com/album/empty-club">Empty Club by Choongum</a></iframe>
+      </div>
+      <div class="player-wrap">
+        <iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2039273009&color=%2307080c&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+      </div>
+    </div>
+  </div>
 
-            <iframe class="soundcloud" width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2039273009&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=false">
-            </iframe>
+</div>
 
-            <div class="biography">
-                <p id="bio">
-                <b>Choongum.</b> Raised on San Francisco's experimental hip-hop and electronic scenes, Choongum's productions are hazy, swampy, and melodic. This signature sound defines his studio work and has taken his music to audiences internationally.
-                <br><br>
-                As a DJ, his selection is entirely mood-dependent. He moves easily from ambient and sunset progressive house to high-energy trance and noisy hardcore. Whatever the direction, he maintains a consistent atmosphere that makes every set feel like a direct extension of his own sound.
-                </p>
-            </div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const btn = document.getElementById('powerBtn');
+  const body = document.getElementById('playerBody');
+  btn.addEventLi
