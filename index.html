@@ -10,19 +10,19 @@
 <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 <meta http-equiv="expires" content="0">
-<link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="57x57"  href="/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60"  href="/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72"  href="/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76"  href="/favicon/apple-icon-76x76.png">
 <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
 <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
 <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
 <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32"  href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96"  href="/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16"  href="/favicon/favicon-16x16.png">
 <link rel="manifest" href="/favicon/manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Rajdhani:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
@@ -31,7 +31,6 @@
 :root {
   --aero-blue:    #3aaed8;
   --aero-lt:      #80d8f8;
-  --aero-dk:      #1a6890;
   --text-on-body: #1e3248;
   --text-mid:     #3a5470;
 }
@@ -46,7 +45,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
   background-image: url('beachbackground.jpg');
   background-size: cover;
   background-position: center top;
@@ -58,15 +56,11 @@ body {
   z-index: 2;
 }
 
-/* ═══ SHARED MODULE ═══ */
+/* ═══ SHARED MODULE — glossy silver-pearl plastic ═══ */
 .module {
   position: relative;
   background: linear-gradient(165deg,
-    #eef2f8 0%,
-    #dde4ef 25%,
-    #cdd8e6 55%,
-    #bfccd8 80%,
-    #b4c2d0 100%);
+    #eef2f8 0%, #dde4ef 25%, #cdd8e6 55%, #bfccd8 80%, #b4c2d0 100%);
   border: 1.5px solid #a0b4c8;
   box-shadow:
     0 1px 0 rgba(255,255,255,0.96) inset,
@@ -77,6 +71,7 @@ body {
     0 4px 14px rgba(0,20,50,0.20);
 }
 
+/* Top gloss coat — full width, respects rounded corners */
 .module::before {
   content: '';
   position: absolute;
@@ -92,10 +87,11 @@ body {
   z-index: 0;
 }
 
+/* Bottom reflection — full width, no inset edges */
 .module::after {
   content: '';
   position: absolute;
-  bottom: 0; left: 5%; right: 5%;
+  bottom: 0; left: 0; right: 0;
   height: 22%;
   background: linear-gradient(0deg, rgba(200,220,240,0.28) 0%, transparent 100%);
   border-radius: inherit;
@@ -119,14 +115,13 @@ body {
   background: linear-gradient(180deg, #e0eaf6 0%, #cad6e8 45%, #bccad8 100%);
   border-bottom: 1px solid rgba(130,160,190,0.45);
   border-radius: 28px 28px 0 0;
-  /* Left padding = bio-panel padding (16px) + panel-chrome padding (15px) = 31px to align with "Bio" label */
-  padding: 0 16px 0 31px;
+  padding: 0 16px 0 31px; /* 31px left aligns content with "Bio" label */
   height: 38px;
   display: flex;
   align-items: center;
-  gap: 0;
 }
 
+/* Full-width gloss — no gaps at corners */
 .titlebar::before {
   content: '';
   position: absolute;
@@ -141,7 +136,7 @@ body {
   pointer-events: none;
 }
 
-/* Crisp highlight line along very top edge */
+/* Crisp highlight line along top edge — full width */
 .titlebar::after {
   content: '';
   position: absolute;
@@ -152,6 +147,7 @@ body {
   pointer-events: none;
 }
 
+/* ── Logo ── */
 .logo {
   font-family: 'Comfortaa', cursive;
   font-weight: 700;
@@ -167,6 +163,7 @@ body {
   line-height: 1;
 }
 
+/* ── Nav pills ── */
 .nav-pills { display: flex; gap: 5px; flex: 1; }
 
 .nav-pill {
@@ -226,18 +223,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.4s, box-shadow 0.4s;
   user-select: none;
 }
 
 .power-btn:hover { opacity: 0.85; }
 
 @keyframes powerGlow {
-  0%,100% { box-shadow: 0 0 10px rgba(58,174,216,0.70), 0 0 22px rgba(58,174,216,0.35), 0 2px 6px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.55); }
-  50%      { box-shadow: 0 0 6px rgba(58,174,216,0.40), 0 0 12px rgba(58,174,216,0.18), 0 2px 6px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.55); }
+  0%, 100% { box-shadow: 0 0 10px rgba(58,174,216,0.70), 0 0 22px rgba(58,174,216,0.35), 0 2px 6px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.55); }
+  50%       { box-shadow: 0 0 6px rgba(58,174,216,0.40), 0 0 12px rgba(58,174,216,0.18), 0 2px 6px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.55); }
 }
 
-/* Power off state */
 .power-btn.off {
   animation: none;
   background: radial-gradient(circle at 38% 28%,
@@ -245,7 +240,7 @@ body {
   box-shadow: 0 0 3px rgba(30,80,100,0.30), 0 2px 6px rgba(0,0,0,0.50), inset 0 1px 0 rgba(255,255,255,0.12);
 }
 
-/* Power icon */
+/* Power icon ring */
 .power-btn::before {
   content: '';
   width: 10px; height: 10px;
@@ -258,6 +253,7 @@ body {
 
 .power-btn.off::before { border-color: rgba(120,150,160,0.45); border-top-color: transparent; }
 
+/* Power icon stem */
 .power-btn::after {
   content: '';
   width: 2px; height: 7px;
@@ -270,7 +266,7 @@ body {
 
 .power-btn.off::after { background: rgba(100,130,140,0.40); }
 
-/* ── Player body ── */
+/* ── Player body: two-column grid ── */
 .player-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -279,25 +275,31 @@ body {
   z-index: 1;
 }
 
+/* Subtle divider between bio and disco columns */
 .player-body::before {
   content: '';
   position: absolute;
   top: 10px; bottom: 10px; left: 50%;
   width: 1px;
   background: linear-gradient(180deg,
-    transparent,
-    rgba(120,160,200,0.28) 20%,
-    rgba(120,160,200,0.28) 80%,
-    transparent);
+    transparent, rgba(120,160,200,0.28) 20%, rgba(120,160,200,0.28) 80%, transparent);
   pointer-events: none;
 }
 
-/* ── POWERED OFF: fade content inside screens ── */
+/* ── Power-off state: dim screens ── */
 .screens-off .panel-chrome,
 .screens-off .disco-scroll {
-  transition: background 0.6s;
   background: linear-gradient(175deg, #040a0e 0%, #030810 100%) !important;
+  transition: background 0.6s;
 }
+
+.bio-text,
+.panel-section-label,
+.album-name,
+.album-year,
+.album-film-tag,
+.disco-label,
+.disco-led { transition: opacity 0.5s ease; opacity: 1; }
 
 .screens-off .bio-text,
 .screens-off .panel-section-label,
@@ -305,22 +307,7 @@ body {
 .screens-off .album-year,
 .screens-off .album-film-tag,
 .screens-off .disco-label,
-.screens-off .disco-led {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-/* Normal state transition back on */
-.bio-text,
-.panel-section-label,
-.album-name,
-.album-year,
-.album-film-tag,
-.disco-label,
-.disco-led {
-  transition: opacity 0.5s ease;
-  opacity: 1;
-}
+.screens-off .disco-led { opacity: 0; }
 
 /* ── Bio panel ── */
 .bio-panel {
@@ -344,17 +331,17 @@ body {
   transition: background 0.6s;
 }
 
+/* Scanlines */
 .panel-chrome::before {
   content: '';
   position: absolute; inset: 0;
   background: repeating-linear-gradient(
-    0deg, transparent, transparent 2px,
-    rgba(0,0,0,0.22) 2px, rgba(0,0,0,0.22) 4px
-  );
+    0deg, transparent, transparent 2px, rgba(0,0,0,0.22) 2px, rgba(0,0,0,0.22) 4px);
   pointer-events: none;
   z-index: 1;
 }
 
+/* Inner glow */
 .panel-chrome::after {
   content: '';
   position: absolute;
@@ -425,8 +412,7 @@ body {
 .disco-led {
   width: 9px; height: 9px;
   border-radius: 50%;
-  background: radial-gradient(circle at 33% 28%,
-    #d8f4ff, #44bce0 42%, #0a6888 80%);
+  background: radial-gradient(circle at 33% 28%, #d8f4ff, #44bce0 42%, #0a6888 80%);
   border: 1px solid rgba(0,0,0,0.25);
   box-shadow:
     0 0 8px rgba(58,174,216,0.90),
@@ -437,8 +423,8 @@ body {
 }
 
 @keyframes ledPulse {
-  0%,100% { opacity: 1; }
-  50%      { opacity: 0.45; }
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
 }
 
 .disco-scroll {
@@ -457,22 +443,14 @@ body {
   transition: background 0.6s;
 }
 
+/* Scanlines */
 .disco-scroll::before {
   content: '';
   position: absolute; inset: 0;
   background: repeating-linear-gradient(
-    0deg, transparent, transparent 2px,
-    rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px
-  );
+    0deg, transparent, transparent 2px, rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px);
   pointer-events: none;
   z-index: 1;
-}
-
-.disco-scroll::-webkit-scrollbar { width: 4px; }
-.disco-scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.35); }
-.disco-scroll::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #3aaed8, #1a6890);
-  border-radius: 2px;
 }
 
 .album-row {
@@ -493,12 +471,6 @@ body {
   border-left-color: var(--aero-blue);
 }
 
-.album-row:hover .album-name {
-  color: var(--aero-lt);
-  text-shadow: 0 0 10px rgba(58,174,216,0.55);
-}
-
-/* Left side of row: name + optional film tag grouped */
 .album-left {
   display: flex;
   align-items: baseline;
@@ -517,7 +489,12 @@ body {
   white-space: nowrap;
 }
 
-/* "Film" tag — distinct teal-amber color, smaller */
+.album-row:hover .album-name {
+  color: var(--aero-lt);
+  text-shadow: 0 0 10px rgba(58,174,216,0.55);
+}
+
+/* "Film" tag in amber — visually distinct from album name */
 .album-film-tag {
   font-family: 'Share Tech Mono', monospace;
   font-size: 9px;
@@ -526,7 +503,6 @@ body {
   text-shadow: 0 0 8px rgba(212,160,80,0.55);
   text-transform: uppercase;
   flex-shrink: 0;
-  transition: opacity 0.5s ease;
 }
 
 .album-year {
@@ -535,12 +511,12 @@ body {
   color: #2e6880;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: color 0.14s, opacity 0.5s ease;
+  transition: color 0.14s;
 }
 
 .album-row:hover .album-year { color: var(--aero-blue); }
 
-/* ═══ EQ MODULE ═══ */
+/* ═══ PLAYER MODULE ═══ */
 .eq-module {
   width: clamp(400px, 52vw, 620px);
   margin-left: auto;
@@ -550,6 +526,7 @@ body {
   overflow: hidden;
 }
 
+/* Connector tab */
 .eq-tab {
   position: absolute;
   top: -1px; left: 24px;
@@ -558,7 +535,7 @@ body {
   border: 1.5px solid #a8b8c8;
   border-bottom: none;
   border-radius: 5px 5px 0 0;
-  box-shadow: 0 -1px 0 rgba(255,255,255,0.70) inset;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.70);
 }
 
 .eq-titlebar {
@@ -573,13 +550,14 @@ body {
   z-index: 1;
 }
 
+/* Full-width gloss on Player titlebar */
 .eq-titlebar::before {
   content: '';
   position: absolute;
-  top: 1px; left: 20%; right: 20%;
-  height: 9px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.52), transparent);
-  border-radius: 0 0 50% 50%;
+  top: 0; left: 0; right: 0;
+  height: 55%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.52) 0%, transparent 100%);
+  pointer-events: none;
 }
 
 .eq-title-text {
@@ -632,25 +610,19 @@ body {
     padding: 10px;
   }
 
-  .wp-wrapper {
-    width: 100%;
-  }
+  .wp-wrapper { width: 100%; }
 
-  /* Main player full width, less aggressive rounding */
   .main-player {
     width: 100%;
     border-radius: 18px 18px 4px 4px;
   }
 
-  /* Titlebar: tighter padding, wrap if needed */
   .titlebar {
-    padding: 0 12px 0 16px;
+    padding: 6px 12px 6px 16px;
     height: auto;
     min-height: 44px;
     flex-wrap: wrap;
     gap: 6px;
-    padding-top: 6px;
-    padding-bottom: 6px;
   }
 
   .logo {
@@ -658,7 +630,6 @@ body {
     margin-right: 8px;
   }
 
-  /* Pills shrink and wrap */
   .nav-pills {
     flex: 1;
     flex-wrap: wrap;
@@ -670,18 +641,12 @@ body {
     padding: 3px 9px;
   }
 
-  /* Power button gets its own full row on very small screens
-     by pushing to a new line with margin-left: auto */
   .power-btn {
     margin-left: auto;
     flex-shrink: 0;
   }
 
-  /* Stack bio and disco vertically */
-  .player-body {
-    grid-template-columns: 1fr;
-  }
-
+  .player-body { grid-template-columns: 1fr; }
   .player-body::before { display: none; }
 
   .bio-panel {
@@ -689,17 +654,13 @@ body {
     padding: 12px 12px 14px;
   }
 
-  .disco-panel {
-    padding: 12px 12px 14px;
-  }
+  .disco-panel { padding: 12px 12px 14px; }
 
-  /* Let discography scroll at a reasonable height */
   .disco-scroll {
     max-height: 52vw;
     min-height: 140px;
   }
 
-  /* Player module full width, flush */
   .eq-module {
     width: 100%;
     margin-right: 0;
@@ -714,9 +675,8 @@ body {
 
 <div class="wp-wrapper">
 
-  <!-- MODULE 1: MAIN PLAYER -->
+  <!-- MAIN PLAYER -->
   <div class="module main-player">
-
     <div class="titlebar">
       <span class="logo">choongum</span>
       <nav class="nav-pills">
@@ -761,7 +721,7 @@ body {
     </div>
   </div>
 
-  <!-- MODULE 2: PLAYER -->
+  <!-- PLAYER MODULE -->
   <div class="module eq-module">
     <div class="eq-tab"></div>
     <div class="eq-titlebar">
@@ -781,17 +741,17 @@ body {
 </div>
 
 <script>
-  // Build booking email in JS so no scraper/CDN can detect and obfuscate it
-  const u = 'choongum'; const d = 'gmail.com';
-  const link = document.getElementById('bookingLink');
-  link.href = 'mailto:' + u + '\x40' + d;
+  // Booking email assembled in JS — prevents CDN/scraper obfuscation
+  const u = 'choongum', d = 'gmail.com';
+  document.getElementById('bookingLink').href = 'mailto:' + u + '\x40' + d;
 
-  // Power button toggle
+  // Power button toggles screen content
   const btn = document.getElementById('powerBtn');
   const playerBody = document.getElementById('playerBody');
   btn.addEventListener('click', () => {
     const off = btn.classList.toggle('off');
     playerBody.classList.toggle('screens-off', off);
   });
-</script></body>
+</script>
+</body>
 </html>
