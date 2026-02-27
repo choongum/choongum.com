@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paintings — Choongum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #111111;
+    --accent: #888888;
+    --rule: #e0e0e0;
+    --detail-bg: #f8f8f8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 56px 60px 40px;
+    border-bottom: 1px solid var(--ink);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  header h1 {
+    font-family: 'Gaegu', cursive;
+    font-size: clamp(20px, 4vw, 36px);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  header nav {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ── COUNT BAR ── */
+  .count-bar {
+    padding: 10px 60px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ── MAIN ── */
+  main {
+    padding: 0 60px;
+  }
+
+  /* ── PAINTING ENTRY ── */
+  .painting {
+    padding: 72px 0 64px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .painting:last-child {
+    border-bottom: none;
+    padding-bottom: 96px;
+  }
+
+  .painting-inner {
+    display: flex;
+    justify-content: center;
+  }
+
+  .painting-num {
+    display: none;
+  }
+
+  .painting-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+  }
+
+  /* main image */
+  .main-picture {
+    display: block;
+    line-height: 0;
+    max-width: 720px;
+    width: 100%;
+  }
+
+  .main-picture img {
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: zoom-in;
+    transition: opacity 0.25s ease;
+  }
+
+  .main-picture img:hover { opacity: 0.94; }
+
+  /* caption row */
+  .caption {
+    margin-top: 16px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 20px;
+    max-width: 720px;
+    width: 100%;
+  }
+
+  .caption-title {
+    display: none;
+  }
+
+  .caption-count {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  /* ── DETAIL STRIP ── */
+  .details-wrap {
+    margin-top: 20px;
+    max-width: 720px;
+    width: 100%;
+  }
+
+  .details-label {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #bbb;
+    margin-bottom: 10px;
+  }
+
+  .details-strip {
+    display: grid;
+    gap: 6px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
+  .detail-pic {
+    display: block;
+    line-height: 0;
+    overflow: hidden;
+    background: var(--detail-bg);
+  }
+
+  .detail-pic img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+    transition: transform 0.35s ease, opacity 0.25s;
+  }
+
+  .detail-pic img:hover {
+    transform: scale(1.04);
+    opacity: 0.9;
+  }
+
+  /* ── DIPTYCH ── */
+  .diptych-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    max-width: 720px;
+    width: 100%;
+  }
+
+  .diptych-grid picture {
+    display: block;
+    line-height: 0;
+  }
+
+  .diptych-grid img {
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: zoom-in;
+    transition: opacity 0.25s;
+  }
+
+  .diptych-grid img:hover { opacity: 0.92; }
+
+  /* ── LIGHTBOX ── */
+  #lb {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.97);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+
+  #lb.open { display: flex; }
+
+  #lb-img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    display: block;
+    box-shadow: 0 2px 40px rgba(0,0,0,0.1);
+  }
+
+  #lb-close {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    font-size: 11px;
+    font-family: 'Helvetica Neue', sans-serif;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  #lb-close:hover { color: var(--ink); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 28px 60px;
+    border-top: 1px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    header, main, .count-bar, footer { padding-left: 24px; padding-right: 24px; }
+    .diptych-grid { gap: 4px; }
+    .details-strip { grid-template-columns: repeat(2, 1fr); }
+    .detail-pic img { height: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Paintings</h1>
+  <nav>Choongum</nav>
+</header>
+
+<div class="count-bar">
+  <span>14 works</span>
+  <span>Click to enlarge</span>
+</div>
+
+<main>
+
+<!-- 01 extranos -->
+<div class="painting">
+  <div class="painting-inner">
+    <div class="painting-num">01</div>
+    <div class="painting-content">
+      <picture class="main-picture">
+        <source srcset="paintings/extranos.jpg" media="(min-width: 600px)">
+        <img src="paintings_mobile/extranosm.jpg" alt="extranos" loading="lazy">
+      </picture>
+      <div class="caption">
+        <span class="caption-title">Extranos</span>
+        <span class="caption-count">3 details</span>
+      </div>
+      <div class="details-wrap">
+        <p class="details-label">Details</p>
+        <div class="details-strip">
+          <picture class="detail-pic">
+            <source srcset="paintings/extranos2.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/extranosm.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/extranos3.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/extranos3m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/extranos4.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/extranos4m.jpg" alt="" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 wall -->
+<div class="painting">
+  <div class="painting-inner">
+    <div class="painting-num">02</div>
+    <div class="painting-content">
+      <picture class="main-picture">
+        <source srcset="paintings/wall.jpg" media="(min-width: 600px)">
+        <img src="paintings_mobile/wallm.jpg" alt="wall" loading="lazy">
+      </picture>
+      <div class="caption">
+        <span class="caption-title">Wall</span>
+        <span class="caption-count">3 details</span>
+      </div>
+      <div class="details-wrap">
+        <p class="details-label">Details</p>
+        <div class="details-strip">
+          <picture class="detail-pic">
+            <source srcset="paintings/wall2.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/wall2m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/wall3.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/wall3m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/wall4.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/wall4m.jpg" alt="" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 slime -->
+<div class="painting">
+  <div class="painting-inner">
+    <div class="painting-num">03</div>
+    <div class="painting-content">
+      <picture class="main-picture">
+        <source srcset="paintings/slime.jpg" media="(min-width: 600px)">
+        <img src="paintings_mobile/slimem.jpg" alt="slime" loading="lazy">
+      </picture>
+      <div class="caption">
+        <span class="caption-title">Slime</span>
+        <span class="caption-count">4 details</span>
+      </div>
+      <div class="details-wrap">
+        <p class="details-label">Details</p>
+        <div class="details-strip">
+          <picture class="detail-pic">
+            <source srcset="paintings/slime2.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/slime2m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/slime3.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/slime3m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/slime4.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/slime4m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/slime5.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/slime5m.jpg" alt="" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 stitch -->
+<div class="painting">
+  <div class="painting-inner">
+    <div class="painting-num">04</div>
+    <div class="painting-content">
+      <picture class="main-picture">
+        <source srcset="paintings/stitch.jpg" media="(min-width: 600px)">
+        <img src="paintings_mobile/stitchm.jpg" alt="stitch" loading="lazy">
+      </picture>
+      <div class="caption">
+        <span class="caption-title">Stitch</span>
+        <span class="caption-count">3 details</span>
+      </div>
+      <div class="details-wrap">
+        <p class="details-label">Details</p>
+        <div class="details-strip">
+          <picture class="detail-pic">
+            <source srcset="paintings/stitch2.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/stitch2m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/stitch3.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/stitch3m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/stitch4.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/stitch4m.jpg" alt="" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 05 cdmx -->
+<div class="painting">
+  <div class="painting-inner">
+    <div class="painting-num">05</div>
+    <div class="painting-content">
+      <picture class="main-picture">
+        <source srcset="paintings/cdmx.jpg" media="(min-width: 600px)">
+        <img src="paintings_mobile/cdmxm.jpg" alt="cdmx" loading="lazy">
+      </picture>
+      <div class="caption">
+        <span class="caption-title">CDMX</span>
+        <span class="caption-count">4 details</span>
+      </div>
+      <div class="details-wrap">
+        <p class="details-label">Details</p>
+        <div class="details-strip">
+          <picture class="detail-pic">
+            <source srcset="paintings/cdmx2.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/cdmx2m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/cdmx3.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/cdmx3m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/cdmx4.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/cdmx4m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/cdmx5.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/cdmx5m.jpg" alt="" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 06 colors -->
+<div class="painting">
+  <div class="painting-inner">
+    <div class="painting-num">06</div>
+    <div class="painting-content">
+      <picture class="main-picture">
+        <source srcset="paintings/colors.jpg" media="(min-width: 600px)">
+        <img src="paintings_mobile/colorsm.jpg" alt="colors" loading="lazy">
+      </picture>
+      <div class="caption">
+        <span class="caption-title">Colors</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 07 green spray -->
+<div class="painting">
+  <div class="painting-inner">
+    <div class="painting-num">07</div>
+    <div class="painting-content">
+      <picture class="main-picture">
+        <source srcset="paintings/greenspray.jpg" media="(min-width: 600px)">
+        <img src="paintings_mobile/greenspraym.jpg" alt="green spray" loading="lazy">
+      </picture>
+      <div class="caption">
+        <span class="caption-title">Green Spray</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 08 who -->
+<div class="painting">
+  <div class="painting-inner">
+    <div class="painting-num">08</div>
+    <div class="painting-content">
+      <picture class="main-picture">
+        <source srcset="paintings/who.jpg" media="(min-width: 600px)">
+        <img src="paintings_mobile/whom.jpg" alt="who" loading="lazy">
+      </picture>
+      <div class="caption">
+        <span class="caption-title">Who</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 09 eternal now -->
+<div class="painting">
+  <div class="painting-inner">
+    <div class="painting-num">09</div>
+    <div class="painting-content">
+      <picture class="main-picture">
+        <source srcset="paintings/eternalnow.jpg" media="(min-width: 600px)">
+        <img src="paintings_mobile/eternalnowm.jpg" alt="eternal now" loading="lazy">
+      </picture>
+      <div class="caption">
+        <span class="caption-title">Eternal Now</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 10 blue magic / red magic (diptych — original has them side by side with no spacer between) -->
+<div class="painting">
+  <div class="painting-inner">
+    <div class="painting-num">10</div>
+    <div class="painting-content">
+      <div class="diptych-grid">
+        <picture>
+          <source srcset="paintings/bluemagic.jpg" media="(min-width: 600px)">
+          <img src="paintings_mobile/bluemagicm.jpg" alt="blue magic" loading="lazy">
+        </picture>
+        <picture>
+          <source srcset="paintings/redmagic.jpg" media="(min-width: 600px)">
+          <img src="paintings_mobile/redmagicm.jpg" alt="red magic" loading="lazy">
+        </picture>
+      </div>
+      <div class="caption">
+        <span class="caption-title">Blue Magic / Red Magic</span>
+        <span class="caption-count">Diptych</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 11 orange -->
+<div class="painting">
+  <div class="painting-inner">
+    <div class="painting-num">11</div>
+    <div class="painting-content">
+      <picture class="main-picture">
+        <source srcset="paintings/orange.jpg" media="(min-width: 600px)">
+        <img src="paintings_mobile/orangem.jpg" alt="orange" loading="lazy">
+      </picture>
+      <div class="caption">
+        <span class="caption-title">Orange</span>
+        <span class="caption-count">4 details</span>
+      </div>
+      <div class="details-wrap">
+        <p class="details-label">Details</p>
+        <div class="details-strip">
+          <picture class="detail-pic">
+            <source srcset="paintings/orange2.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/orange2m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/orange3.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/orange3m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/orange4.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/orange4m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/orange5.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/orange5m.jpg" alt="" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 12 green -->
+<div class="painting">
+  <div class="painting-inner">
+    <div class="painting-num">12</div>
+    <div class="painting-content">
+      <picture class="main-picture">
+        <source srcset="paintings/green.jpg" media="(min-width: 600px)">
+        <img src="paintings_mobile/greenm.jpg" alt="green" loading="lazy">
+      </picture>
+      <div class="caption">
+        <span class="caption-title">Green</span>
+        <span class="caption-count">4 details</span>
+      </div>
+      <div class="details-wrap">
+        <p class="details-label">Details</p>
+        <div class="details-strip">
+          <picture class="detail-pic">
+            <source srcset="paintings/green2.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/green2m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/green3.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/green3m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/green4.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/green4m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/green5.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/green5m.jpg" alt="" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 13 blue fabric -->
+<div class="painting">
+  <div class="painting-inner">
+    <div class="painting-num">13</div>
+    <div class="painting-content">
+      <picture class="main-picture">
+        <source srcset="paintings/bluefabric.jpg" media="(min-width: 600px)">
+        <img src="paintings_mobile/bluefabricm.jpg" alt="blue fabric" loading="lazy">
+      </picture>
+      <div class="caption">
+        <span class="caption-title">Blue Fabric</span>
+        <span class="caption-count">4 details</span>
+      </div>
+      <div class="details-wrap">
+        <p class="details-label">Details</p>
+        <div class="details-strip">
+          <picture class="detail-pic">
+            <source srcset="paintings/bluefabric2.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/bluefabric2m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/bluefabric3.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/bluefabric3m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/bluefabric4.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/bluefabric4m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/bluefabric5.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/bluefabric5m.jpg" alt="" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 14 choonface -->
+<div class="painting">
+  <div class="painting-inner">
+    <div class="painting-num">14</div>
+    <div class="painting-content">
+      <picture class="main-picture">
+        <source srcset="paintings/choonface.jpg" media="(min-width: 600px)">
+        <img src="paintings_mobile/choonfacem.jpg" alt="choonface" loading="lazy">
+      </picture>
+      <div class="caption">
+        <span class="caption-title">Choonface</span>
+        <span class="caption-count">2 details</span>
+      </div>
+      <div class="details-wrap">
+        <p class="details-label">Details</p>
+        <div class="details-strip">
+          <picture class="detail-pic">
+            <source srcset="paintings/choonface2.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/choonface2m.jpg" alt="" loading="lazy">
+          </picture>
+          <picture class="detail-pic">
+            <source srcset="paintings/choonface3.jpg" media="(min-width: 600px)">
+            <img src="paintings_mobile/choonface3m.jpg" alt="" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <span>Choongum</span>
+  <span>Paintings</span>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <div id="lb-close" onclick="closeLB()">Close</div>
+  <img id="lb-img" src="" alt="">
+</div>
+
+<script>
+  const lb = document.getElementById('lb');
+  const lbImg = document.getElementById('lb-img');
+
+  document.querySelectorAll('.main-picture img, .detail-pic img, .diptych-grid img').forEach(img => {
+    img.addEventListener('click', () => {
+      const pic = img.closest('picture');
+      const src = pic ? (pic.querySelector('source')?.srcset || img.src) : img.src;
+      lbImg.src = src;
+      lb.classList.add('open');
+    });
+  });
+
+  lb.addEventListener('click', e => {
+    if (e.target === lb || e.target === lbImg) closeLB();
+  });
+
+  function closeLB() {
+    lb.classList.remove('open');
+    lbImg.src = '';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLB();
+  });
+</script>
+
+</body>
+</html>
