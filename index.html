@@ -2,8 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>choongum</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Choongum</title>
+<meta name="description" content="Choongum portfolio">
+<meta property="og:image" content="webheader.jpg">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<meta http-equiv="expires" content="0">
+<link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Rajdhani:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -601,16 +621,92 @@ body {
 
 /* ═══ MOBILE ═══ */
 @media (max-width: 640px) {
-  html, body { overflow: auto; height: auto; }
-  body { align-items: flex-start; padding: 10px; }
-  .main-player { width: 100%; border-radius: 22px 22px 4px 4px; }
-  .player-body { grid-template-columns: 1fr; }
+  html, body {
+    overflow: auto;
+    height: auto;
+    min-height: 100%;
+  }
+
+  body {
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .wp-wrapper {
+    width: 100%;
+  }
+
+  /* Main player full width, less aggressive rounding */
+  .main-player {
+    width: 100%;
+    border-radius: 18px 18px 4px 4px;
+  }
+
+  /* Titlebar: tighter padding, wrap if needed */
+  .titlebar {
+    padding: 0 12px 0 16px;
+    height: auto;
+    min-height: 44px;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  .logo {
+    font-size: 20px;
+    margin-right: 8px;
+  }
+
+  /* Pills shrink and wrap */
+  .nav-pills {
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .nav-pill {
+    font-size: 10px;
+    padding: 3px 9px;
+  }
+
+  /* Power button gets its own full row on very small screens
+     by pushing to a new line with margin-left: auto */
+  .power-btn {
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  /* Stack bio and disco vertically */
+  .player-body {
+    grid-template-columns: 1fr;
+  }
+
   .player-body::before { display: none; }
-  .bio-panel { border-bottom: 1px solid rgba(120,160,200,0.18); }
-  .disco-scroll { max-height: 55vh; }
-  .eq-module { width: 100%; margin-right: 0; border-radius: 0 0 22px 22px; }
+
+  .bio-panel {
+    border-bottom: 1px solid rgba(120,160,200,0.18);
+    padding: 12px 12px 14px;
+  }
+
+  .disco-panel {
+    padding: 12px 12px 14px;
+  }
+
+  /* Let discography scroll at a reasonable height */
+  .disco-scroll {
+    max-height: 52vw;
+    min-height: 140px;
+  }
+
+  /* Player module full width, flush */
+  .eq-module {
+    width: 100%;
+    margin-right: 0;
+    border-radius: 0 0 18px 18px;
+  }
+
   .eq-tab { display: none; }
-  .titlebar { padding-left: 18px; }
 }
 </style>
 </head>
@@ -626,7 +722,7 @@ body {
       <nav class="nav-pills">
         <a class="nav-pill" href="https://www.instagram.com/choongum/" target="_blank">instagram</a>
         <a class="nav-pill" href="https://choongum.com/paintings/paintings.html" target="_blank">paintings</a>
-        <a class="nav-pill" href="/cdn-cgi/l/email-protection#e2818a8d8d8c85978fa2858f838b8ecc818d8f">booking</a>
+        <a class="nav-pill" id="bookingLink">booking</a>
       </nav>
       <div class="power-btn" id="powerBtn" title="Power"></div>
     </div>
@@ -684,7 +780,18 @@ body {
 
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+  // Build booking email in JS so no scraper/CDN can detect and obfuscate it
+  const u = 'choongum'; const d = 'gmail.com';
+  const link = document.getElementById('bookingLink');
+  link.href = 'mailto:' + u + '\x40' + d;
+
+  // Power button toggle
   const btn = document.getElementById('powerBtn');
-  const body = document.getElementById('playerBody');
-  btn.addEventLi
+  const playerBody = document.getElementById('playerBody');
+  btn.addEventListener('click', () => {
+    const off = btn.classList.toggle('off');
+    playerBody.classList.toggle('screens-off', off);
+  });
+</script></body>
+</html>
