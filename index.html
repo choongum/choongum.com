@@ -1,691 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=900">
-<title>Choongum</title>
-<meta name="description" content="Choongum portfolio">
-<meta property="og:image" content="webheader.jpg">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
-<meta http-equiv="expires" content="0">
-<link rel="apple-touch-icon" sizes="57x57"  href="/favicon/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60"  href="/favicon/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72"  href="/favicon/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76"  href="/favicon/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Choongum — electronic music, DJ mixes, paintings</title>
+<meta name="description" content="Choongum makes experimental electronic music: ambient, downtempo and trance-leaning dance, with trip hop, hyphy and hip hop underneath. Albums, DJ mixes, press kit and paintings.">
+<meta property="og:title" content="Choongum">
+<meta property="og:description" content="Albums, DJ mixes, press kit and paintings.">
+<meta property="og:image" content="https://choongum.com/img/webheader.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#cfd9e5">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32"  href="/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96"  href="/favicon/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16"  href="/favicon/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
 <link rel="manifest" href="/favicon/manifest.json">
-<link rel="preconnect" href="https://bandcamp.com">
-<link rel="preconnect" href="https://w.soundcloud.com">
-<link rel="preconnect" href="https://api.soundcloud.com">
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Rajdhani:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --aero-blue:    #3aaed8;
-  --aero-lt:      #80d8f8;
-  --text-on-body: #1e3248;
-  --text-mid:     #3a5470;
-}
-
-html {
-  font-family: 'Nunito', sans-serif;
-}
-
-body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-image: url('beachbackground.jpg');
-  background-size: cover;
-  background-position: center top;
-  background-attachment: fixed;
-}
-
-/* ── WRAPPER ── */
-.wp-wrapper {
-  position: relative;
-  z-index: 2;
-}
-
-/* ═══ SHARED MODULE — glossy silver-pearl plastic ═══ */
-.module {
-  position: relative;
-  background: linear-gradient(165deg,
-    #eef2f8 0%, #dde4ef 25%, #cdd8e6 55%, #bfccd8 80%, #b4c2d0 100%);
-  border: 1.5px solid #a0b4c8;
-  box-shadow:
-    0 1px 0 rgba(255,255,255,0.96) inset,
-    0 -1px 0 rgba(0,0,0,0.14) inset,
-    1px 0 0 rgba(255,255,255,0.60) inset,
-    -1px 0 0 rgba(0,0,0,0.08) inset,
-    0 12px 48px rgba(0,20,50,0.30),
-    0 4px 14px rgba(0,20,50,0.20);
-}
-
-/* Top gloss coat — full width, respects rounded corners */
-.module::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 52%;
-  background: linear-gradient(180deg,
-    rgba(255,255,255,0.62) 0%,
-    rgba(255,255,255,0.24) 45%,
-    rgba(255,255,255,0.06) 75%,
-    transparent 100%);
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Bottom reflection — full width, no inset edges */
-.module::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 22%;
-  background: linear-gradient(0deg, rgba(200,220,240,0.28) 0%, transparent 100%);
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ═══ MAIN PLAYER ═══ */
-.main-player {
-  width: clamp(560px, 88vw, 840px);
-  border-radius: 30px 30px 6px 6px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-/* ── Title bar ── */
-.titlebar {
-  position: relative;
-  z-index: 1;
-  background: linear-gradient(180deg, #e0eaf6 0%, #cad6e8 45%, #bccad8 100%);
-  border-bottom: 1px solid rgba(130,160,190,0.45);
-  border-radius: 28px 28px 0 0;
-  padding: 0 16px 0 31px; /* 31px left aligns content with "Bio" label */
-  height: 38px;
-  display: flex;
-  align-items: center;
-}
-
-/* Full-width gloss — no gaps at corners */
-.titlebar::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 58%;
-  background: linear-gradient(180deg,
-    rgba(255,255,255,0.74) 0%,
-    rgba(255,255,255,0.38) 35%,
-    rgba(255,255,255,0.08) 75%,
-    transparent 100%);
-  border-radius: 28px 28px 0 0;
-  pointer-events: none;
-}
-
-/* Crisp highlight line along top edge — full width */
-.titlebar::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1.5px;
-  background: rgba(255,255,255,0.88);
-  border-radius: 28px 28px 0 0;
-  pointer-events: none;
-}
-
-/* ── Logo ── */
-.logo {
-  font-family: 'Comfortaa', cursive;
-  font-weight: 700;
-  font-size: clamp(18px, 2.4vw, 26px);
-  letter-spacing: 0.08em;
-  background: linear-gradient(175deg, #1e5880 0%, #2a82b8 40%, #3aaed8 70%, #5cc8e8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 1px 0 rgba(255,255,255,0.70));
-  flex: 0 0 auto;
-  margin-right: 16px;
-  line-height: 1;
-}
-
-/* ── Nav pills ── */
-.nav-pills { display: flex; gap: 5px; flex: 1; }
-
-.nav-pill {
-  font-family: 'Nunito', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--text-on-body);
-  text-decoration: none;
-  padding: 3px 13px;
-  border-radius: 14px;
-  background: linear-gradient(180deg,
-    rgba(255,255,255,0.80) 0%,
-    rgba(210,228,245,0.58) 50%,
-    rgba(185,210,232,0.48) 100%);
-  border: 1px solid rgba(100,145,180,0.30);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.88) inset, 0 2px 6px rgba(0,30,70,0.12);
-  transition: all 0.18s;
-  white-space: nowrap;
-  position: relative;
-  overflow: hidden;
-}
-
-.nav-pill::before {
-  content: '';
-  position: absolute;
-  top: 1px; left: 0; right: 0;
-  height: 44%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.60), transparent);
-  border-radius: 14px 14px 0 0;
-  pointer-events: none;
-}
-
-.nav-pill:hover {
-  color: #0e3e62;
-  background: linear-gradient(180deg, rgba(200,240,255,0.92) 0%, rgba(130,210,245,0.68) 100%);
-  border-color: rgba(58,174,216,0.55);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.95) inset, 0 0 12px rgba(58,174,216,0.28), 0 2px 6px rgba(0,30,70,0.10);
-}
-
-/* ── Power button ── */
-.power-btn {
-  width: 26px; height: 26px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  cursor: pointer;
-  position: relative;
-  background: radial-gradient(circle at 38% 28%,
-    #c8f0ff 0%, #5cc0e8 28%, #1e7eb0 55%, #0a4870 80%, #062038 100%);
-  border: 1.5px solid rgba(10,50,100,0.55);
-  box-shadow:
-    0 0 10px rgba(58,174,216,0.70),
-    0 0 22px rgba(58,174,216,0.35),
-    0 2px 6px rgba(0,0,0,0.38),
-    inset 0 1px 0 rgba(255,255,255,0.55);
-  animation: powerGlow 3s ease-in-out infinite;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-}
-
-.power-btn:hover { opacity: 0.85; }
-
-@keyframes powerGlow {
-  0%, 100% { box-shadow: 0 0 10px rgba(58,174,216,0.70), 0 0 22px rgba(58,174,216,0.35), 0 2px 6px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.55); }
-  50%       { box-shadow: 0 0 6px rgba(58,174,216,0.40), 0 0 12px rgba(58,174,216,0.18), 0 2px 6px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.55); }
-}
-
-.power-btn.off {
-  animation: none;
-  background: radial-gradient(circle at 38% 28%,
-    #3a4448 0%, #1a2228 40%, #0e1418 70%, #060c10 100%);
-  box-shadow: 0 0 3px rgba(30,80,100,0.30), 0 2px 6px rgba(0,0,0,0.50), inset 0 1px 0 rgba(255,255,255,0.12);
-}
-
-/* Power icon ring */
-.power-btn::before {
-  content: '';
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  border: 2px solid rgba(200,240,255,0.90);
-  border-top-color: transparent;
-  position: absolute;
-  transition: border-color 0.4s;
-}
-
-.power-btn.off::before { border-color: rgba(120,150,160,0.45); border-top-color: transparent; }
-
-/* Power icon stem */
-.power-btn::after {
-  content: '';
-  width: 2px; height: 7px;
-  background: rgba(200,240,255,0.90);
-  position: absolute;
-  top: 5px;
-  border-radius: 2px;
-  transition: background 0.4s;
-}
-
-.power-btn.off::after { background: rgba(100,130,140,0.40); }
-
-/* ── Player body: two-column grid ── */
-.player-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 0;
-  position: relative;
-  z-index: 1;
-}
-
-/* Subtle divider between bio and disco columns */
-.player-body::before {
-  content: '';
-  position: absolute;
-  top: 10px; bottom: 10px; left: 50%;
-  width: 1px;
-  background: linear-gradient(180deg,
-    transparent, rgba(120,160,200,0.28) 20%, rgba(120,160,200,0.28) 80%, transparent);
-  pointer-events: none;
-}
-
-/* ── Power-off state: dim screens ── */
-.screens-off .panel-chrome,
-.screens-off .disco-scroll {
-  background: linear-gradient(175deg, #040a0e 0%, #030810 100%) !important;
-  transition: background 0.6s;
-}
-
-.bio-text,
-.panel-section-label,
-.album-name,
-.album-year,
-.album-film-tag,
-.disco-label,
-.disco-led { transition: opacity 0.5s ease; opacity: 1; }
-
-.screens-off .bio-text,
-.screens-off .panel-section-label,
-.screens-off .album-name,
-.screens-off .album-year,
-.screens-off .album-film-tag,
-.screens-off .disco-label,
-.screens-off .disco-led { opacity: 0; }
-
-/* ── Bio panel ── */
-.bio-panel {
-  padding: 14px 16px 18px;
-  display: flex;
-  flex-direction: column;
-}
-
-.panel-chrome {
-  background: linear-gradient(175deg, #071018 0%, #050d16 100%);
-  border-radius: 10px;
-  border: 1.5px solid rgba(0,0,0,0.50);
-  box-shadow:
-    inset 0 3px 14px rgba(0,0,0,0.90),
-    inset 0 0 30px rgba(0,8,20,0.95),
-    0 1px 0 rgba(255,255,255,0.70);
-  padding: 12px 15px;
-  position: relative;
-  overflow: hidden;
-  flex: 1;
-  transition: background 0.6s;
-}
-
-/* Scanlines */
-.panel-chrome::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: repeating-linear-gradient(
-    0deg, transparent, transparent 2px, rgba(0,0,0,0.22) 2px, rgba(0,0,0,0.22) 4px);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Inner glow */
-.panel-chrome::after {
-  content: '';
-  position: absolute;
-  top: -10%; left: 5%; right: 5%;
-  height: 50%;
-  background: radial-gradient(ellipse, rgba(58,174,216,0.10) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.panel-section-label {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 9.5px;
-  letter-spacing: 0.32em;
-  color: #4ab8d8;
-  text-transform: uppercase;
-  margin-bottom: 9px;
-  position: relative;
-  z-index: 2;
-  text-shadow: 0 0 10px rgba(74,184,216,0.60);
-}
-
-.panel-section-label::after {
-  content: '';
-  display: inline-block;
-  width: 22px; height: 1px;
-  background: linear-gradient(90deg, #2a88b0, transparent);
-  margin-left: 8px;
-  vertical-align: middle;
-}
-
-.bio-text {
-  color: #b8dff0;
-  font-size: clamp(11px, 1.08vw, 13px);
-  line-height: 1.82;
-  font-weight: 500;
-  position: relative;
-  z-index: 2;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.80);
-}
-
-.bio-text p + p { margin-top: 9px; }
-
-/* ── Disco panel ── */
-.disco-panel {
-  padding: 14px 16px 18px;
-  display: flex;
-  flex-direction: column;
-}
-
-.disco-header-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  padding: 0 2px;
-}
-
-.disco-label {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 9.5px;
-  letter-spacing: 0.30em;
-  color: #4ab8d8;
-  text-transform: uppercase;
-  text-shadow: 0 0 8px rgba(74,184,216,0.50);
-}
-
-.disco-led {
-  width: 9px; height: 9px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 33% 28%, #d8f4ff, #44bce0 42%, #0a6888 80%);
-  border: 1px solid rgba(0,0,0,0.25);
-  box-shadow:
-    0 0 8px rgba(58,174,216,0.90),
-    0 0 18px rgba(58,174,216,0.45),
-    inset 0 1px 0 rgba(255,255,255,0.55);
-  animation: ledPulse 2.8s ease-in-out infinite;
-  flex-shrink: 0;
-}
-
-@keyframes ledPulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.45; }
-}
-
-.disco-scroll {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  background: linear-gradient(175deg, #071018 0%, #050d16 100%);
-  border-radius: 10px;
-  border: 1.5px solid rgba(0,0,0,0.50);
-  box-shadow:
-    inset 0 3px 14px rgba(0,0,0,0.90),
-    inset 0 0 30px rgba(0,8,20,0.95),
-    0 1px 0 rgba(255,255,255,0.70);
-  padding: 4px 0;
-  position: relative;
-  transition: background 0.6s;
-}
-
-/* Scanlines */
-.disco-scroll::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: repeating-linear-gradient(
-    0deg, transparent, transparent 2px, rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.album-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 5px 12px;
-  text-decoration: none;
-  transition: background 0.14s, border-color 0.14s;
-  position: relative;
-  z-index: 2;
-  border-left: 2px solid transparent;
-}
-
-.album-row:hover {
-  background: rgba(58,174,216,0.13);
-  border-left-color: var(--aero-blue);
-}
-
-.album-left {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  min-width: 0;
-}
-
-.album-name {
-  color: #90ccdf;
-  font-family: 'Rajdhani', sans-serif;
-  font-size: clamp(12px, 1.18vw, 14px);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  transition: color 0.14s, text-shadow 0.14s;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.70);
-  white-space: nowrap;
-}
-
-.album-row:hover .album-name {
-  color: var(--aero-lt);
-  text-shadow: 0 0 10px rgba(58,174,216,0.55);
-}
-
-/* "Film" tag in amber — visually distinct from album name */
-.album-film-tag {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  color: #d4a050;
-  text-shadow: 0 0 8px rgba(212,160,80,0.55);
-  text-transform: uppercase;
-  flex-shrink: 0;
-}
-
-.album-year {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 10px;
-  color: #2e6880;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: color 0.14s;
-}
-
-.album-row:hover .album-year { color: var(--aero-blue); }
-
-/* ═══ PLAYER MODULE ═══ */
-.eq-module {
-  width: clamp(400px, 65vw, 620px);
-  margin-left: auto;
-  margin-right: clamp(4px, 1.5vw, 30px);
-  border-radius: 0 0 26px 26px;
-  border-top: 1.5px solid rgba(255,255,255,0.60);
-  overflow: hidden;
-}
-
-/* Connector tab */
-.eq-tab {
-  position: absolute;
-  top: -1px; left: 24px;
-  width: 68px; height: 6px;
-  background: linear-gradient(180deg, #d0dcea, #bccad8);
-  border: 1.5px solid #a8b8c8;
-  border-bottom: none;
-  border-radius: 5px 5px 0 0;
-  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.70);
-}
-
-.eq-titlebar {
-  height: 24px;
-  background: linear-gradient(180deg, #d6e2ef 0%, #c4d2e0 100%);
-  border-bottom: 1px solid rgba(100,140,170,0.28);
-  display: flex;
-  align-items: center;
-  padding: 0 14px;
-  gap: 8px;
-  position: relative;
-  z-index: 1;
-}
-
-/* Full-width gloss on Player titlebar */
-.eq-titlebar::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 55%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.52) 0%, transparent 100%);
-  pointer-events: none;
-}
-
-.eq-title-text {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.28em;
-  color: var(--text-mid);
-  text-transform: uppercase;
-}
-
-.eq-title-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(80,120,160,0.22), transparent);
-}
-
-.eq-body {
-  padding: 10px 16px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  position: relative;
-  z-index: 1;
-}
-
-.player-wrap {
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1.5px solid rgba(0,0,0,0.32);
-  background: #050d16;
-  box-shadow: inset 0 2px 10px rgba(0,0,0,0.75), 0 1px 0 rgba(255,255,255,0.68);
-}
-
-.player-wrap iframe {
-  display: block;
-  width: 100%;
-  border: none;
-}
-
-
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Nunito:wght@400;600;700;800&family=Rajdhani:wght@600;700&family=Share+Tech+Mono&display=swap">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="wp-wrapper">
+<div class="win" id="win">
 
-  <!-- MAIN PLAYER -->
-  <div class="module main-player">
-    <div class="titlebar">
-      <span class="logo">choongum</span>
-      <nav class="nav-pills">
-        <a class="nav-pill" href="https://www.instagram.com/choongum/" target="_blank">instagram</a>
-        <a class="nav-pill" href="https://choongum.com/paintings.html" target="_blank">paintings</a>
-        <a class="nav-pill" id="bookingLink">booking</a>
-      </nav>
-      <div class="power-btn" id="powerBtn" title="Power"></div>
-    </div>
+  <a class="logo" href="#music">choongum</a>
 
-    <div class="player-body" id="playerBody">
-      <div class="bio-panel">
-        <div class="panel-chrome">
-          <div class="panel-section-label">Bio</div>
-          <div class="bio-text">
-            <p>Choongum makes experimental electronic music that moves between modes. Ambient and downtempo on one side, trance-leaning dance tracks on the other, with trip hop, hyphy, and hip hop running underneath. It tends toward the atmospheric and the melodic, loose in structure, leftfield and bright.</p>
+  <nav class="tabs" aria-label="Sections">
+    <a href="#music" data-tab="music">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
+      <span>Music</span>
+    </a>
+    <a href="#mixes" data-tab="mixes">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/></svg>
+      <span><span class="d-only">DJ </span>Mixes</span>
+    </a>
+    <a href="#bio" data-tab="bio">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg>
+      <span>Bio</span>
+    </a>
+    <a href="#press" data-tab="press">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h6l2 2h10v10H3z"/></svg>
+      <span>Press<span class="d-only"> Kit</span></span>
+    </a>
+    <a href="#paintings" data-tab="paintings">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 2-2s-1-1.5-1-2.5S14 15 15.5 15H18a3 3 0 0 0 3-3c0-5-4-9-9-9z"/><circle cx="7.5" cy="11" r="1"/><circle cx="11" cy="7" r="1"/><circle cx="16" cy="8.5" r="1"/></svg>
+      <span><span class="d-only">Paintings</span><span class="m-only">Art</span></span>
+    </a>
+  </nav>
 
-			<p>His DJ sets work the same way, drifting from chill-out rooms to club floors and back. He has played in Mexico, China, Australia, Sri Lanka, and the United States.</p>
+  <div class="actions">
+    <a class="icon-btn d-only" href="https://choongum.bandcamp.com" aria-label="Bandcamp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 6h14l-4 12H3z"/></svg></a>
+    <a class="icon-btn d-only" href="https://www.youtube.com/@Choongum" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/></svg></a>
+    <a class="icon-btn d-only" href="https://www.instagram.com/choongum/" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg></a>
+    <a class="btn btn-aqua book" href="#press"><span class="d-only">Book Choongum</span><span class="m-only">Book</span></a>
+  </div>
 
-			<p>He also paints and photographs the places he travels through. The music, the images, and the canvases all come from the same eye.</p>
+  <main class="content" id="content">
+
+    <!-- MUSIC -->
+    <section class="panel panel-music" data-panel="music" aria-label="Music">
+      <div class="lcd album-hero">
+        <div class="hero-art"><img id="heroCover" src="img/covers/graffio.jpg" alt="" width="700" height="700"></div>
+        <div class="album-hero-info">
+          <div class="label" id="heroLabel">Latest release</div>
+          <h1 id="heroTitle">Graffio</h1>
+          <div class="mono meta" id="heroMeta">ALBUM · 2023</div>
+        </div>
+      </div>
+      <div class="lcd discography">
+        <div class="panel-head">
+          <h2 class="label">Discography</h2>
+          <span class="mono dim" id="albumCount"></span>
+        </div>
+        <div class="album-grid" id="albumGrid"></div>
+        <a class="film-row" href="https://youtu.be/mT7pdPEUf94">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M7 5v14M17 5v14M2 12h20"/></svg>
+          <span><strong>Nature Documentary</strong> <span class="mono">FILM · 2015 · Watch the full movie on YouTube</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- MIXES -->
+    <section class="panel panel-mixes" data-panel="mixes" aria-label="DJ mixes">
+      <div class="mix-main">
+        <div class="avs">
+          <div class="avs-bar"><span class="avs-dot"></span><span class="avs-dot"></span><span class="avs-title">WINAMP VISUALIZATION</span><span id="visDur"></span></div>
+          <div class="vis-screen" id="visSlot">
+            <img id="visPoster" src="" alt="">
+            <button class="play-big" id="visPlay" type="button" aria-label="Play mix"><svg viewBox="0 0 24 24" class="fill" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg></button>
+            <div class="vis-error" id="visError" hidden>
+              <p id="visErrorText"></p>
+              <a class="btn btn-aqua" id="visErrorLink" href="#">Watch on YouTube</a>
+            </div>
+          </div>
+        </div>
+        <div class="lcd mix-info">
+          <div>
+            <h1 id="mixTitle"></h1>
+            <div class="mono meta" id="mixMeta"></div>
+          </div>
+          <a class="btn btn-ghost" id="mixYT" href="#">Watch on YouTube</a>
+        </div>
+      </div>
+      <div class="lcd playlist">
+        <div class="panel-head">
+          <h2 class="label">Playlist · DJ mixes</h2>
+          <span class="mono dim" id="mixTotal"></span>
+        </div>
+        <ol class="pl" id="mixList"></ol>
+        <div class="pl-foot"><span class="mono dim">Full channel on YouTube</span><a class="mono" href="https://www.youtube.com/@Choongum">@Choongum →</a></div>
+      </div>
+    </section>
+
+    <!-- BIO -->
+    <section class="panel panel-bio" data-panel="bio" aria-label="Bio">
+      <div class="lcd bio-text">
+        <h1 class="label">Bio</h1>
+        <p>Choongum makes electronic music for both ends of the night. Some records are ambient and downtempo, others are trancey and built for dancing, and trip hop, hyphy and hip hop keep turning up underneath. Whatever the tempo, it tends to come out melodic, a little loose and bright.</p>
+        <p>His DJ sets go the same way, from the chill-out room to the club floor and back again.</p>
+        <p>When he's not making music, he paints and takes photos of the places he travels through.</p>
+        <h2 class="label">Has played in</h2>
+        <ul class="chips">
+          <li>Mexico</li><li>China</li><li>Australia</li><li>Sri Lanka</li><li>United States</li>
+        </ul>
+      </div>
+      <div class="bio-side">
+        <img class="bio-photo" src="img/choongum.jpg" alt="Choongum" loading="lazy">
+        <div class="lcd links-card">
+          <h2 class="label">Listen &amp; follow</h2>
+          <div class="btn-row">
+            <a class="btn btn-ghost" href="https://choongum.bandcamp.com">Bandcamp</a>
+            <a class="btn btn-ghost" href="https://www.youtube.com/@Choongum">YouTube</a>
+            <a class="btn btn-ghost" href="https://www.instagram.com/choongum/">Instagram</a>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="disco-panel">
-        <div class="disco-header-row">
-          <div class="disco-led"></div>
-          <span class="disco-label">Discography</span>
+    <!-- PRESS -->
+    <section class="panel panel-press" data-panel="press" aria-label="Press kit and booking">
+      <div class="lcd booking">
+        <h1 class="label">Booking</h1>
+        <div class="email-row">
+          <a class="mono" href="mailto:choongum@gmail.com">choongum@gmail.com</a>
+          <button class="btn btn-ghost btn-sm" type="button" id="copyEmail">Copy</button>
         </div>
-        <div class="disco-scroll">
-          <a class="album-row" href="https://choongum.bandcamp.com/album/graffio" target="_blank"><div class="album-left"><span class="album-name">Graffio</span></div><span class="album-year">2023</span></a>
-          <a class="album-row" href="https://choongum.bandcamp.com/album/so-far-so-good" target="_blank"><div class="album-left"><span class="album-name">So Far So Good</span></div><span class="album-year">2023</span></a>
-          <a class="album-row" href="https://choongum.bandcamp.com/album/biomorphism" target="_blank"><div class="album-left"><span class="album-name">Biomorphism</span></div><span class="album-year">2021</span></a>
-          <a class="album-row" href="https://choongum.bandcamp.com/album/decomposition" target="_blank"><div class="album-left"><span class="album-name">Decomposition</span></div><span class="album-year">2021</span></a>
-          <a class="album-row" href="https://choongum.bandcamp.com/album/empty-club" target="_blank"><div class="album-left"><span class="album-name">Empty Club</span></div><span class="album-year">2020</span></a>
-          <a class="album-row" href="https://choongum.bandcamp.com/album/choongum-type-beat" target="_blank"><div class="album-left"><span class="album-name">Choongum Type Beat</span></div><span class="album-year">2020</span></a>
-          <a class="album-row" href="https://choongum.bandcamp.com/album/peace-fixation" target="_blank"><div class="album-left"><span class="album-name">Peace Fixation</span></div><span class="album-year">2019</span></a>
-          <a class="album-row" href="https://choongum.bandcamp.com/album/cityscapes" target="_blank"><div class="album-left"><span class="album-name">Cityscapes</span></div><span class="album-year">2019</span></a>
-          <a class="album-row" href="https://youtu.be/mT7pdPEUf94" target="_blank"><div class="album-left"><span class="album-name">Nature Documentary</span><span class="album-film-tag">Film</span></div><span class="album-year">2015</span></a>
-          <a class="album-row" href="https://choongum.bandcamp.com/album/pure-spirit" target="_blank"><div class="album-left"><span class="album-name">Pure Spirit</span></div><span class="album-year">2013</span></a>
-          <a class="album-row" href="https://choongum.bandcamp.com/album/timefog" target="_blank"><div class="album-left"><span class="album-name">Timefog</span></div><span class="album-year">2012</span></a>
+        <form class="inquiry" id="inquiry">
+          <label class="field">Your name<input name="name" type="text" autocomplete="name"></label>
+          <label class="field">Your email<input name="email" type="email" autocomplete="email" required></label>
+          <label class="field">Event, city &amp; date<input name="event" type="text"></label>
+          <label class="field">Message<textarea name="message" rows="3"></textarea></label>
+          <button class="btn btn-aqua" type="submit">Send inquiry</button>
+        </form>
+      </div>
+      <div class="lcd presskit">
+        <h2 class="label">Press kit</h2>
+        <ul class="dl-list" id="pressList"></ul>
+        <h2 class="label">Short bio · copy-ready</h2>
+        <div class="short-bio">
+          <p id="shortBio">Choongum makes electronic music that runs from ambient and downtempo to trancey dance tracks, with trip hop, hyphy and hip hop underneath. He has DJed in Mexico, China, Australia, Sri Lanka and the US.</p>
+          <button class="btn btn-ghost btn-sm" type="button" id="copyBio">Copy</button>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- PLAYER MODULE -->
-  <div class="module eq-module">
-    <div class="eq-tab"></div>
-    <div class="eq-titlebar">
-      <span class="eq-title-text">Player</span>
-      <div class="eq-title-line"></div>
+    <!-- PAINTINGS -->
+    <section class="panel panel-paintings" data-panel="paintings" aria-label="Paintings">
+      <div class="lcd paint-head">
+        <h1 class="label">Paintings</h1>
+        <span class="mono dim" id="paintCount"></span>
+      </div>
+      <div class="paint-grid" id="paintGrid"></div>
+    </section>
+
+  </main>
+
+  <!-- PLAYER DECK -->
+  <div class="deck" id="deck" data-mode="album" aria-label="Player">
+    <div class="deck-album">
+      <iframe id="bcPlayer" title="Bandcamp player" src="" seamless></iframe>
     </div>
-    <div class="eq-body">
-      <div class="player-wrap">
-        <iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=398605062/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" seamless><a href="https://choongum.bandcamp.com/album/empty-club">Empty Club by Choongum</a></iframe>
+    <div class="deck-mix">
+      <div class="transport">
+        <button class="tp d-only" id="tpPrev" type="button" aria-label="Previous mix"><svg viewBox="0 0 24 24" class="fill" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+        <button class="tp main" id="tpPlay" type="button" aria-label="Play"><svg viewBox="0 0 24 24" class="fill i-play" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><svg viewBox="0 0 24 24" class="fill i-pause" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button>
+        <button class="tp d-only" id="tpNext" type="button" aria-label="Next mix"><svg viewBox="0 0 24 24" class="fill" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
       </div>
-      <div class="player-wrap">
-        <iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2039273009&color=%2307080c&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+      <div class="lcd deck-lcd">
+        <img id="deckImg" src="" alt="">
+        <div class="deck-text">
+          <div class="deck-line"><span class="mono" id="deckTitle"></span><span class="mono" id="deckTime">0:00</span></div>
+          <div class="prog" id="deckProg" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><span id="deckProgFill"></span></div>
+        </div>
+        <div class="spec" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       </div>
+      <button class="btn btn-silver d-only" id="deckAlbum" type="button">Back to albums</button>
     </div>
   </div>
 
 </div>
 
-<script>
-  // Booking email assembled in JS — prevents CDN/scraper obfuscation
-  const u = 'choongum', d = 'gmail.com';
-  document.getElementById('bookingLink').href = 'mailto:' + u + '\x40' + d;
+<!-- Floating YouTube window: sits over the Mixes screen, shrinks to a mini window elsewhere -->
+<div class="vis-float" id="visFloat" hidden>
+  <div class="vis-mini-bar">
+    <span class="avs-dot"></span><span class="mono">VIS</span>
+    <button type="button" id="visExpand" aria-label="Open mixes">▢</button>
+    <button type="button" id="visClose" aria-label="Stop mix">✕</button>
+  </div>
+  <div class="vis-frame"><div id="yt"></div></div>
+</div>
 
-  // Power button toggles screen content
-  const btn = document.getElementById('powerBtn');
-  const playerBody = document.getElementById('playerBody');
-  btn.addEventListener('click', () => {
-    const off = btn.classList.toggle('off');
-    playerBody.classList.toggle('screens-off', off);
-  });
-</script>
+<!-- Painting viewer -->
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Painting viewer">
+  <div class="viewer-win">
+    <div class="viewer-bar">
+      <span class="mono" id="viewerCount"></span>
+      <button type="button" class="viewer-x" id="viewerClose" aria-label="Close">✕</button>
+    </div>
+    <div class="viewer-stage">
+      <button type="button" class="viewer-nav prev" id="viewerPrev" aria-label="Previous painting"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <img id="viewerImg" src="" alt="">
+      <button type="button" class="viewer-nav next" id="viewerNext" aria-label="Next painting"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <div class="viewer-strip" id="viewerStrip"></div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
 </body>
 </html>
